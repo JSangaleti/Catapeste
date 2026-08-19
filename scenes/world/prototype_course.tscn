@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/PrototypeCourse.cs" id="1_course"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(7000, 240)
+
+[sub_resource type="RectangleShape2D" id="TreeShape"]
+size = Vector2(100, 260)
+
+[sub_resource type="CircleShape2D" id="BirdShape"]
+radius = 42.0
+
+[sub_resource type="RectangleShape2D" id="TowerShape"]
+size = Vector2(130, 335)
+
+[sub_resource type="RectangleShape2D" id="ArrowShape"]
+size = Vector2(125, 24)
+
+[sub_resource type="CircleShape2D" id="CannonBallShape"]
+radius = 32.0
+
+[node name="PrototypeCourse" type="Node2D"]
+script = ExtResource("1_course")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(3000, 720)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="Tree" type="Area2D" parent="." groups=["hazard"]]
+position = Vector2(1600, 470)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
+shape = SubResource("TreeShape")
+
+[node name="Bird" type="Area2D" parent="." groups=["hazard"]]
+position = Vector2(2450, 280)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird"]
+shape = SubResource("BirdShape")
+
+[node name="Watchtower" type="Area2D" parent="." groups=["hazard"]]
+position = Vector2(3380, 432.5)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Watchtower"]
+shape = SubResource("TowerShape")
+
+[node name="Arrow" type="Area2D" parent="." groups=["hazard"]]
+position = Vector2(4400, 360)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow"]
+shape = SubResource("ArrowShape")
+
+[node name="CannonBall" type="Area2D" parent="." groups=["hazard"]]
+position = Vector2(5100, 470)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CannonBall"]
+shape = SubResource("CannonBallShape")
+

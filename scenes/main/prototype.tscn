@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://cfdow7lfkq1h6"]
+
+[ext_resource type="Script" uid="uid://bxe3f2c0ryk8n" path="res://scripts/gameplay/PrototypeController.cs" id="1_controller"]
+[ext_resource type="PackedScene" path="res://scenes/world/prototype_course.tscn" id="2_course"]
+[ext_resource type="PackedScene" path="res://scenes/characters/plebeian.tscn" id="3_player"]
+[ext_resource type="Script" uid="uid://bhhe0fb2mlco2" path="res://scripts/ui/LaunchMeter.cs" id="4_meter"]
+
+[sub_resource type="StyleBoxFlat" id="LaunchPanelStyle"]
+bg_color = Color(0.125, 0.118, 0.106, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.89, 0.76, 0.48, 0.75)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="ResultsPanelStyle"]
+bg_color = Color(0.09, 0.086, 0.078, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.53, 0.28, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="ButtonStyle"]
+content_margin_left = 16.0
+content_margin_top = 11.0
+content_margin_right = 16.0
+content_margin_bottom = 11.0
+bg_color = Color(0.35, 0.45, 0.23, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Prototype" type="Node2D" unique_id=1467459695]
+script = ExtResource("1_controller")
+
+[node name="Course" parent="." unique_id=492881445 instance=ExtResource("2_course")]
+
+[node name="Plebeian" parent="." unique_id=1702556440 instance=ExtResource("3_player")]
+position = Vector2(220, 535)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=293402366]
+
+[node name="TopBar" type="ColorRect" parent="HUD" unique_id=138765996]
+offset_right = 1280.0
+offset_bottom = 70.0
+color = Color(0.07, 0.065, 0.058, 0.9)
+
+[node name="Margin" type="MarginContainer" parent="HUD/TopBar" unique_id=1975604371]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 12
+
+[node name="Stats" type="HBoxContainer" parent="HUD/TopBar/Margin" unique_id=951972]
+layout_mode = 2
+theme_override_constants/separation = 42
+
+[node name="Brand" type="Label" parent="HUD/TopBar/Margin/Stats" unique_id=446027468]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.52, 1)
+theme_override_font_sizes/font_size = 26
+text = "CATAPESTE"
+
+[node name="Distance" type="Label" parent="HUD/TopBar/Margin/Stats" unique_id=494933766]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.93, 0.87, 1)
+theme_override_font_sizes/font_size = 18
+text = "DISTÂNCIA  0 m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="HUD/TopBar/Margin/Stats" unique_id=1503897306]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.82, 0.52, 1)
+theme_override_font_sizes/font_size = 18
+text = "MOEDAS  0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="HUD/TopBar/Margin/Stats" unique_id=2052239365]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.93, 0.87, 1)
+theme_override_font_sizes/font_size = 18
+text = "CATAPULTA  NV. 1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Status" type="Label" parent="HUD" unique_id=1140320169]
+offset_left = 24.0
+offset_top = 86.0
+offset_right = 650.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0.11, 0.105, 0.09, 1)
+theme_override_colors/font_shadow_color = Color(0.95, 0.9, 0.75, 0.75)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 19
+text = "ESPAÇO para travar a força"
+
+[node name="LaunchPanel" type="Panel" parent="HUD" unique_id=1045791325]
+offset_left = 420.0
+offset_top = 425.0
+offset_right = 860.0
+offset_bottom = 700.0
+theme_override_styles/panel = SubResource("LaunchPanelStyle")
+
+[node name="Title" type="Label" parent="HUD/LaunchPanel" unique_id=951008146]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 13.0
+offset_right = 420.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.95, 0.88, 0.7, 1)
+theme_override_font_sizes/font_size = 20
+text = "FORÇA DO LANÇAMENTO"
+horizontal_alignment = 1
+
+[node name="LaunchMeter" type="Control" parent="HUD/LaunchPanel" unique_id=11432148]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 44.0
+offset_right = 420.0
+offset_bottom = 255.0
+mouse_filter = 2
+script = ExtResource("4_meter")
+
+[node name="Weak" type="Label" parent="HUD/LaunchPanel" unique_id=1566789406]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 221.0
+offset_right = 105.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.74, 0.84, 0.56, 1)
+text = "FRACO"
+
+[node name="Medium" type="Label" parent="HUD/LaunchPanel" unique_id=1328920295]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 126.0
+offset_right = 195.0
+offset_bottom = 155.0
+theme_override_colors/font_color = Color(0.96, 0.84, 0.4, 1)
+text = "MÉDIO"
+
+[node name="Strong" type="Label" parent="HUD/LaunchPanel" unique_id=157341491]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 126.0
+offset_right = 330.0
+offset_bottom = 155.0
+theme_override_colors/font_color = Color(0.96, 0.59, 0.3, 1)
+text = "FORTE"
+
+[node name="Maximum" type="Label" parent="HUD/LaunchPanel" unique_id=1463170114]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 221.0
+offset_right = 426.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.96, 0.39, 0.34, 1)
+text = "MÁXIMO"
+
+[node name="ResultsPanel" type="Panel" parent="HUD" unique_id=533511646]
+visible = false
+offset_left = 410.0
+offset_top = 205.0
+offset_right = 870.0
+offset_bottom = 515.0
+theme_override_styles/panel = SubResource("ResultsPanelStyle")
+
+[node name="Content" type="VBoxContainer" parent="HUD/ResultsPanel" unique_id=897381602]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 26.0
+offset_right = 430.0
+offset_bottom = 284.0
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="HUD/ResultsPanel/Content" unique_id=274975315]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.52, 1)
+theme_override_font_sizes/font_size = 25
+text = "FIM DA TENTATIVA"
+horizontal_alignment = 1
+
+[node name="Summary" type="Label" parent="HUD/ResultsPanel/Content" unique_id=1266855172]
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.91, 0.86, 1)
+theme_override_font_sizes/font_size = 20
+text = "Distância: 0 m
+Recompensa: 0 moedas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="VBoxContainer" parent="HUD/ResultsPanel/Content" unique_id=1314308662]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Upgrade" type="Button" parent="HUD/ResultsPanel/Content/Actions" unique_id=1848912287]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.96, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("ButtonStyle")
+text = "MELHORAR"
+
+[node name="NewLaunch" type="Button" parent="HUD/ResultsPanel/Content/Actions" unique_id=2111068093]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.96, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("ButtonStyle")
+text = "NOVO LANÇAMENTO"
